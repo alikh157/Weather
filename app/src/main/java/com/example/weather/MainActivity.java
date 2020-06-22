@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
         im9 = findViewById(R.id.im9);
         im10 = findViewById(R.id.im10);
         im11 = findViewById(R.id.im11);
+        final String[] city = {"Tehran"};
+
         //Recycler-------------------------------------------
         final List<String> cityList = new ArrayList<>();
         //button----------------------------------------------
@@ -74,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
         final TextView humidity = findViewById(R.id.humidity);
         final TextView describe = findViewById(R.id.describe);
         final TextView txtLoc = findViewById(R.id.txtLoc);
+            txtLoc.setText(city[0]);
         final TextView wind = findViewById(R.id.wind);
         final TextView degree = findViewById(R.id.degree);
         final TextView txtT1 = findViewById(R.id.txtT1);
@@ -87,17 +90,19 @@ public class MainActivity extends AppCompatActivity {
         final TextView day5 = findViewById(R.id.day5);
         final EditText edtSearch = findViewById(R.id.edtSearch);
         final ArrayList<test> WeatherList = new ArrayList<>();
-
         //----------------------------------------------------
+
+
         ref.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String city = "Tehran";
-                city = edtSearch.getText().toString();
-                txtLoc.setText(city);
                 AsyncHttpClient client = new AsyncHttpClient();
-                final String address = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=902e7a86eeda9b601fed684e78c02daf";
-                final String finalCity = city;
+                if(edtSearch.getText().toString().length()>0)
+                    city[0] = edtSearch.getText().toString();
+
+                String address = "http://api.openweathermap.org/data/2.5/forecast?q=" + city[0] + "&appid=902e7a86eeda9b601fed684e78c02daf";
+                txtLoc.setText(city[0]);
+                final String finalCity = city[0];
                 client.get(address, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -368,5 +373,6 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
+        ref.performClick();
     }
 }

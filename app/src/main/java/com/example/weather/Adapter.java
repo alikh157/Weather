@@ -14,9 +14,10 @@ import java.util.List;
 public class Adapter extends RecyclerView.Adapter<Adapter.TestRecyclerHolder> {
     List<String> myCity;
     EditText edt;
-    public Adapter(List<String> myCity,EditText edt) {
+
+    public Adapter(List<String> myCity, EditText edt) {
         this.myCity = myCity;
-        this.edt=edt;
+        this.edt = edt;
     }
 
     @NonNull
@@ -39,6 +40,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.TestRecyclerHolder> {
         });
 
     }
+
     @Override
     public int getItemCount() {
         return myCity.size();
